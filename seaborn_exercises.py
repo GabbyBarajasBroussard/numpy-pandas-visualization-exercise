@@ -140,7 +140,7 @@ plt.subplots_adjust(hspace=0.4)
 # ## Question # 3
 # ### Load the swiss dataset and read it's documentation. Create visualizations to answer the following questions:
 
-# In[20]:
+# In[ ]:
 
 
 swiss = data('swiss')
@@ -149,7 +149,7 @@ swiss.head()
 
 # Create an attribute named is_catholic that holds a boolean value of whether or not the province is Catholic. (Choose a cutoff point for what constitutes catholic)
 
-# In[55]:
+# In[ ]:
 
 
 swiss['is_catholic'] = swiss.Catholic >50 #I decided that if more thatn 50% of people are catholic, it is fair to assume the city is catholic
@@ -158,7 +158,7 @@ swiss.head()
 
 # Does whether or not a province is Catholic influence fertility?
 
-# In[40]:
+# In[ ]:
 
 
 palette= sns.set_palette('magma_r')
@@ -167,28 +167,28 @@ sns.relplot(x='Catholic', y='Fertility', hue='is_catholic', data=swiss)
 
 # What measure correlates most strongly with fertility?
 
-# In[51]:
+# In[ ]:
 
 
 palette= sns.set_palette('mako_r')
 sns.relplot(x='Agriculture', y='Fertility', data=swiss)
 
 
-# In[47]:
+# In[ ]:
 
 
 palette= sns.set_palette('nipy_spectral_r')
 sns.relplot(x='Examination', y='Fertility', data=swiss)
 
 
-# In[52]:
+# In[ ]:
 
 
 palette= sns.set_palette('gist_earth')
 sns.relplot(x='Education', y='Fertility', data=swiss)
 
 
-# In[54]:
+# In[ ]:
 
 
 palette= sns.set_palette('icefire_r')
@@ -198,7 +198,7 @@ sns.relplot(x='Infant.Mortality', y='Fertility', data=swiss)
 # ## Question # 4
 # ### Using the chipotle dataset from the previous exercise, create a bar chart that shows the 4 most popular items and the revenue produced by each.
 
-# In[8]:
+# In[ ]:
 
 
 from env import host, password, user
@@ -206,7 +206,7 @@ def get_db_url(db, user=user, host=host, password=password):
     return f'mysql+pymysql://{user}:{password}@{host}/{db}'
 
 
-# In[9]:
+# In[ ]:
 
 
 chipotle_sql_query = '''
@@ -215,28 +215,28 @@ chipotle_sql_query = '''
                      '''
 
 
-# In[10]:
+# In[ ]:
 
 
 chipotle = pd.read_sql(chipotle_sql_query, get_db_url('chipotle'))
 chipotle.head(2)
 
 
-# In[11]:
+# In[ ]:
 
 
 chipotle.item_price = chipotle.item_price.str.replace('$', '').astype('float')
 chipotle
 
 
-# In[13]:
+# In[ ]:
 
 
 top_four= chipotle.groupby('item_name').quantity.agg('sum').nlargest(4, keep= 'all')
 top_four
 
 
-# In[17]:
+# In[ ]:
 
 
 revenue= chipotle.groupby('item_name')[['item_price']].sum().sort_values(by='item_price', ascending=False).head(4)
@@ -244,7 +244,7 @@ revenue
 #This is the amount of total revenue brought in by the top 4 items
 
 
-# In[85]:
+# In[ ]:
 
 
 top_four.plot(kind='bar',
@@ -258,7 +258,7 @@ plt.xlabel('Item Name')
 plt.show()
 
 
-# In[18]:
+# In[ ]:
 
 
 revenue.plot(kind='bar',
@@ -275,14 +275,14 @@ plt.show()
 # ## Question # 5
 # ### Load the sleepstudy data and read it's documentation. Use seaborn to create a line chart of all the individual subject's reaction times and a more prominant line showing the average change in reaction time.
 
-# In[28]:
+# In[7]:
 
 
 sleep_study= data('sleepstudy')
 sleep_study
 
 
-# In[29]:
+# In[8]:
 
 
 #finding the average change in reaction times
@@ -291,12 +291,27 @@ avg_change = avg_change.reset_index()
 avg_change
 
 
-# In[88]:
+# In[45]:
 
 
 plt.figure(figsize=(12, 10))
-plt.plot(avg_change.index, avg_change.Reaction, linewidth=8, label='Average Change', c='red', linestyle="-") #plotting the average change
-plt.legend('Average Change') # adding the average change to my legend
-sns.lineplot (x='Days', y='Reaction',hue='Subject',data=sleep_study, palette='seismic') # plotting each subjects reaction times over days
+sns.set_style('whitegrid')
+sns.lineplot (data=sleep_study, x='Days', y='Reaction', hue='Subject', estimator=np.mean, palette='seismic')# plotting each subjects reaction times over days
+sns.lineplot(data = sleep_study, x = 'Days', y = 'Reaction', color = 'black', estimator = 'mean')
+sns.set_context('talk')
+sns.set_style("ticks", {"xtick.major.size": 8, "ytick.major.size": 8})
+plt.xlim(0,9)
 plt.title("Change in each subject's reaction time") #adding title to chart
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
