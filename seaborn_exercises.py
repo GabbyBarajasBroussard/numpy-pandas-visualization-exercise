@@ -282,36 +282,21 @@ sleep_study= data('sleepstudy')
 sleep_study
 
 
-# In[8]:
+# In[48]:
 
 
-#finding the average change in reaction times
-avg_change = sleep_study.groupby('Days').Reaction.agg('mean')
-avg_change = avg_change.reset_index()
-avg_change
+sleep_study['Subject'] = 'Subject_' + sleep_study.Subject.astype(str)
 
 
-# In[45]:
+# In[51]:
 
 
 plt.figure(figsize=(12, 10))
 sns.set_style('whitegrid')
-sns.lineplot (data=sleep_study, x='Days', y='Reaction', hue='Subject', estimator=np.mean, palette='seismic')# plotting each subjects reaction times over days
+sns.lineplot (data=sleep_study, x='Days', y='Reaction', hue='Subject', estimator=np.mean, palette='nipy_spectral_r')# plotting each subjects reaction times over days
 sns.lineplot(data = sleep_study, x = 'Days', y = 'Reaction', color = 'black', estimator = 'mean')
 sns.set_context('talk')
 sns.set_style("ticks", {"xtick.major.size": 8, "ytick.major.size": 8})
 plt.xlim(0,9)
 plt.title("Change in each subject's reaction time") #adding title to chart
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
 
