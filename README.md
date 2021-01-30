@@ -1,4 +1,4 @@
-This directory covers lessons and exercises for the following topics:
+This directory covers lessons and exercises for the following Data Science Library topics:
 
 matplotlib
 numpy
