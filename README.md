@@ -1,4 +1,4 @@
-#This directory covers lessons and exercises for the following Data Science Library topics:
+<h1> This directory covers lessons and exercises for the following Data Science Library topics: </h1>
 <ol>
 <li>matplotlib
 <li>numpy
