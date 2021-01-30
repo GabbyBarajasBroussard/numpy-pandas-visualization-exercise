@@ -1,10 +1,13 @@
-This directory covers lessons and exercises for the following Data Science Library topics:
-
-matplotlib
-numpy
-pandas 
-    Overview
-    Series
-    Dataframes
-    Advanced Dataframes
-seaborn
+#This directory covers lessons and exercises for the following Data Science Library topics:
+<ol>
+<li>matplotlib
+<li>numpy
+<li>pandas: 
+    <ul>
+    <li>Overview
+    <li>Series
+    <li>Dataframes
+    <li>Advanced Dataframes
+    </ul>
+<li>seaborn
+</ol>
